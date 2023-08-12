@@ -21,22 +21,24 @@ jobs:
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+        with:
+          mask-ecr: true
 
       - name: Verify directory contents
         run: ls -la .
 
-      - name: Build and push Image 1
+      - name: Build and push Image 1 (Application)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: Dockerfile
           push: true
-          tags: 481510018989.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment:latest
+          tags: 439896484708.dkr.ecr.us-east-1.amazonaws.com/flask-app-repo:latest
 
-      - name: Build and push Image 2
+      - name: Build and push Image 2 (Database)
         uses: docker/build-push-action@v2
         with:
           context: .
           file: Dockerfile_mysql
           push: true
-          tags: 481510018989.dkr.ecr.us-east-1.amazonaws.com/clo835-assignment:latest1
+          tags: 439896484708.dkr.ecr.us-east-1.amazonaws.com/flask-app-repo:latest1
